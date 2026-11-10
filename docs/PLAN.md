@@ -26,7 +26,7 @@ Principi:
 
 - **I ruoli sono legati a capacità, non a modelli.** Cambiando i modelli o le macchine si modifica solo il file di configurazione.
 - **Verifica deterministica prima, giudizio dei modelli dopo.** Dove esiste un oracolo (test, build, linter, schema), questo vince sempre sul parere di un modello.
-- **Contesti freschi e memoria esplicita.** Il lavoro lungo si coordina tramite un *ledger* su filesystem (piano, note, stato, soluzione corrente), non tramite conversazioni lunghe. Questo è il meccanismo che il lavoro di riferimento metodo-di-riferimento indica come fonte del guadagno (scomposizione e contesto persistente).
+- **Contesti freschi e memoria esplicita.** Il lavoro lungo si coordina tramite un *ledger* su filesystem (piano, note, stato, soluzione corrente), non tramite conversazioni lunghe. La fonte del guadagno è la scomposizione con contesto persistente, non la conversazione lunga.
 - **Due percorsi di esecuzione.** *Fast path* (una chiamata, bassa latenza) e *deep mode* (orchestrazione con ledger, massima qualità). La deep mode è il default per i task difficili; il fast path non deve mai degradare la qualità sui task che lo richiedono.
 - **Degradazione controllata.** Se un nodo cade o è occupato, i suoi ruoli passano a un altro nodo e il sistema continua.
 
@@ -78,7 +78,7 @@ threeracqwen/
 Azioni:
 
 - Crea il repository, il tooling e la CI minima.
-- Leggi il repository pubblico di metodo-di-riferimento (`riferimento-esterno/metodo-di-riferimento`) e il relativo paper. Documenta in `docs/reference-metodo-di-riferimento.md` come funziona il ledger, come si scompone un problema e come si esegue il benchmark.
+- Analizza il metodo di riferimento esterno (doc privato, fuori repo) e documenta come funziona il ledger, come si scompone un problema e come si esegue il benchmark.
 - Verifica che ogni nodo dell'utente risponda a una chiamata chat-completions e annota il runtime, la versione e i flag usati.
 
 Criteri di uscita: repo funzionante; documento di riferimento scritto; tutti i nodi raggiungibili da un semplice script.
@@ -148,7 +148,7 @@ Criteri di uscita: tabella baseline per ogni modello su ogni insieme; varianza s
 
 ### Fase 3: ledger e orchestrazione con un solo modello
 
-Obiettivo: riprodurre il meccanismo di metodo-di-riferimento e verificare sul setup dell'utente se migliora la qualità.
+Obiettivo: riprodurre il meccanismo di riferimento (ledger + orchestrazione) e verificare sul setup dell'utente se migliora la qualità.
 
 Azioni:
 
@@ -527,7 +527,7 @@ Regola di decisione: adotta una variante solo se migliora la qualità in modo no
 - Non ottimizzare la velocità prima di avere la baseline della Fase 2.
 - Non fidarsi dell'autovalutazione di un modello come unico criterio.
 - Non far scrivere al modello piccolo informazioni che entrano nel ledger senza una verifica.
-- Non assumere che i guadagni di metodo-di-riferimento si trasferiscano: sono misurati su problemi di programmazione competitiva con test; per altri tipi di task vanno verificati.
+- Non assumere che i guadagni del metodo di riferimento si trasferiscano: sono misurati su problemi di programmazione competitiva con test; per altri tipi di task vanno verificati.
 - Non assumere che la mescolanza di modelli diversi migliori la qualità: è un'ipotesi da misurare.
 - Non legare il codice a un runtime, a una versione o a un nome di modello.
 

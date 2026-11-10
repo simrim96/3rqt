@@ -1,6 +1,6 @@
 # Ruoli logici. Nessun modello nominato qui: l'assegnazione ruolo->nodo arriva
 # dalla calibrazione (Fase 1) e dai vincoli in config/nodes.yaml (roles_allowed).
-# Temperature ereditate dal riferimento metodo-di-riferimento (docs/reference-metodo-di-riferimento.md §2):
+# Temperature di default per ruolo:
 # pianificazione 0.3, ideazione 0.4, esecuzione/curatela 0.2.
 
 roles:

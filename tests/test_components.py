@@ -17,7 +17,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 def test_roles_reali():
     roles = load_roles_config(REPO_ROOT / "config" / "roles.yaml")
     assert {"planner", "worker", "verifier", "reviewer", "router", "edge"} <= set(roles)
-    # temperatura ereditata dai prompt metodo-di-riferimento (docs/reference-metodo-di-riferimento.md §2)
+    # temperatura di default per ruolo
     assert roles["planner"].temperature == 0.3
     assert roles["router"].temperature == 0.0
     assert roles["worker"].temperature == 0.2

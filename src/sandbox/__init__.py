@@ -1,6 +1,6 @@
 """Esecuzione sicura di codice e test in isolamento (Fase 3+/9).
 
-Seed: esecuzione subprocess con timeout, sul pattern del verificatore metodo-di-riferimento
+Seed: esecuzione subprocess con timeout
 (sottoprocesso reale, stdout catturato, timeout per caso). La sandbox vera
 (worktree/container) e' pianificata; NON usare per codice non fidato prima
 della Fase 9.
@@ -24,7 +24,7 @@ class RunResult:
 def run_python(
     code: str, stdin: str = "", timeout: float = 10.0, python: str = "python3"
 ) -> RunResult:
-    """Esegue codice Python come subprocess reale con timeout (pattern metodo-di-riferimento)."""
+    """Esegue codice Python come subprocess reale con timeout."""
     try:
         proc = subprocess.run(  # noqa: S603 - Fase 0/3: ambiente locale fidato, sandbox in Fase 9
             [python, "-c", code],

@@ -29,3 +29,6 @@ experiments/results/
 .idea/
 .vscode/
 .DS_Store
+
+# ledger dei task: contiene repo git annidate, mai nella repo del progetto
+workspaces/
