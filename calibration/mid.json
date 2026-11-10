@@ -1,0 +1,296 @@
+{
+  "node": "mid",
+  "endpoint": "http://localhost:8080/v1",
+  "model": "Qwen3.8-27B-exl3-3.0",
+  "date": "2026-11-10T01:57:04+00:00",
+  "config_hash": "95ceb87547280b99",
+  "runtime": {
+    "runtime": "tabbyAPI",
+    "version": null,
+    "server": "uvicorn",
+    "models": [
+      "Qwen3.8-27B-DFlash2-EXL3-4.0",
+      "Qwen3.8-27B-exl3-3.0"
+    ]
+  },
+  "suite_version": "mini-1",
+  "capabilities_snapshot": {
+    "tools": true,
+    "json_object": true,
+    "json_schema": true,
+    "streamed_usage": null,
+    "chat_template_applied": true,
+    "chat_template_source": "GET /props:chat_template",
+    "effective_ctx": null,
+    "notes": {},
+    "probed_at": "2026-11-10T01:56:59+00:00",
+    "config_hash": "95ceb87547280b99"
+  },
+  "measures": {
+    "stream": {
+      "ttft_s": 0.3343,
+      "gen_tokens": 120,
+      "gen_seconds": 2.2002,
+      "tokens_per_s": 64.31,
+      "stream": true,
+      "degraded": []
+    },
+    "concurrency": [
+      {
+        "concurrency": 1,
+        "repeats": [
+          {
+            "ok": 1,
+            "failed": 0,
+            "agg_tokens_per_s": 35.29,
+            "mean_ttft_s": 0.3616,
+            "max_ttft_s": 0.3616,
+            "wall_s": 1.1903
+          }
+        ]
+      }
+    ],
+    "context": {
+      "requested_tokens_approx": 4096,
+      "prompt_tokens_reported": 3699,
+      "usage_estimated": false,
+      "ttft_prefill_s": 6.2855,
+      "wall_s": 6.296
+    },
+    "long_generation": {
+      "runs": [
+        {
+          "ok": true,
+          "gen_tokens": 600,
+          "tokens_per_s": 69.8,
+          "finish_reason": "length",
+          "ttft_s": 0.3478
+        }
+      ],
+      "stable": true,
+      "max_tokens": 600
+    },
+    "mini_eval": {
+      "suite": "mini-1",
+      "n": 40,
+      "correct": 36,
+      "accuracy": 0.9,
+      "seconds": 106.6,
+      "items": [
+        {
+          "id": "arith_01",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_02",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_03",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_04",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_05",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_06",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_07",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_08",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_09",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_10",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_11",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_12",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "mod_01",
+          "category": "mod",
+          "ok": false,
+          "got": "Check via CRT: mod8 7^13 ≡ (-1)^13=-1≡7 mod8. mod125: phi=100, 7^? Let's compute",
+          "expected": "407",
+          "answer_in_reasoning": false
+        },
+        {
+          "id": "mod_02",
+          "category": "mod",
+          "ok": false,
+          "got": "3^16=6561^2 mod 7919. Compute 6561^2 = (6500+61)^2=42,250,000+793,000+3721? Let'",
+          "expected": "7306",
+          "answer_in_reasoning": false
+        },
+        {
+          "id": "mod_03",
+          "category": "mod",
+          "ok": true
+        },
+        {
+          "id": "mod_04",
+          "category": "mod",
+          "ok": true
+        },
+        {
+          "id": "mod_05",
+          "category": "mod",
+          "ok": false,
+          "got": "Check",
+          "expected": "300",
+          "answer_in_reasoning": false
+        },
+        {
+          "id": "conv_01",
+          "category": "conv",
+          "ok": true
+        },
+        {
+          "id": "conv_02",
+          "category": "conv",
+          "ok": true
+        },
+        {
+          "id": "conv_03",
+          "category": "conv",
+          "ok": true
+        },
+        {
+          "id": "conv_04",
+          "category": "conv",
+          "ok": true
+        },
+        {
+          "id": "conv_05",
+          "category": "conv",
+          "ok": true
+        },
+        {
+          "id": "str_01",
+          "category": "string",
+          "ok": true
+        },
+        {
+          "id": "str_02",
+          "category": "string",
+          "ok": true
+        },
+        {
+          "id": "str_03",
+          "category": "string",
+          "ok": true
+        },
+        {
+          "id": "str_04",
+          "category": "string",
+          "ok": true
+        },
+        {
+          "id": "str_05",
+          "category": "string",
+          "ok": true
+        },
+        {
+          "id": "str_06",
+          "category": "string",
+          "ok": true
+        },
+        {
+          "id": "json_01",
+          "category": "json",
+          "ok": true
+        },
+        {
+          "id": "json_02",
+          "category": "json",
+          "ok": true
+        },
+        {
+          "id": "json_03",
+          "category": "json",
+          "ok": true
+        },
+        {
+          "id": "json_04",
+          "category": "json",
+          "ok": true
+        },
+        {
+          "id": "json_05",
+          "category": "json",
+          "ok": true
+        },
+        {
+          "id": "logic_01",
+          "category": "logic",
+          "ok": true
+        },
+        {
+          "id": "logic_02",
+          "category": "logic",
+          "ok": true
+        },
+        {
+          "id": "logic_03",
+          "category": "logic",
+          "ok": true
+        },
+        {
+          "id": "logic_04",
+          "category": "logic",
+          "ok": true
+        },
+        {
+          "id": "date_01",
+          "category": "date",
+          "ok": true
+        },
+        {
+          "id": "date_02",
+          "category": "date",
+          "ok": false,
+          "got": "We need answer only result single line. Need compute day of week for 2026-11-10.",
+          "expected": "Tuesday",
+          "answer_in_reasoning": false
+        },
+        {
+          "id": "date_03",
+          "category": "date",
+          "ok": true
+        }
+      ]
+    }
+  },
+  "warnings": []
+}

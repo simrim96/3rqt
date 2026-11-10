@@ -1,0 +1,382 @@
+{
+  "name": "semi",
+  "version": "2026.11-1",
+  "description": "Estrazione/trasformazione/query con vincolo 'una riga' a schema JSON. Golden canonico con alternative equiserializzabili (any_of/defaults).",
+  "gen_system": "Sei un motore deterministico di estrazione e trasformazione dati. Rispondi con UNA SOLA riga: un unico oggetto JSON valido, niente prose, niente markdown, niente newline nel JSON.",
+  "items": [
+    {
+      "id": "sv_ext_01",
+      "category": "estrazione",
+      "difficulty": "easy",
+      "prompt": "Estrai i dati della ricevuta. righe = numero di articoli (non di pezzi). subtotale = somma dei totali riga (qta x prezzo unitario). totale = subtotale con lo sconto applicato. data_iso in formato YYYY-MM-DD. Arrotonda a 2 decimali.\n\nDATI:\nRicevuta n. RR-2024-117 emessa il 12/03/2024 da Ditta Rossi SRL (Via Verdi 9, Milano).\nArticoli:\n- 2x Pannello solare 150W @ 150,00 EUR\n- 1x Cavetteria 10m @ 40,00 EUR\n- 4x Connettore MC4 @ 2,50 EUR\nSubtotale: articoli x quantita'. Sconto fedelta': 5%. Totale: subtotale meno sconto.\nValuta fatturata: EUR. IVA esclusa.\n\nRispondi con UNA SOLA riga contenente UN SOLO oggetto JSON (niente testo, niente fence, niente altre righe) con ESATTAMENTE questi campi:\n  - \"fornitore\" (string)\n  - \"numero\" (string)\n  - \"data_iso\" (string)\n  - \"valuta\" (string) — uno tra ['EUR', 'USD', 'GBP']\n  - \"righe\" (integer)\n  - \"subtotale\" (number)\n  - \"sconto_pct\" (integer) (default 0: puoi ometterlo)\n  - \"totale\" (number)",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "fornitore": {
+            "type": "string"
+          },
+          "numero": {
+            "type": "string"
+          },
+          "data_iso": {
+            "type": "string"
+          },
+          "valuta": {
+            "type": "string",
+            "enum": [
+              "EUR",
+              "USD",
+              "GBP"
+            ]
+          },
+          "righe": {
+            "type": "integer"
+          },
+          "subtotale": {
+            "type": "number"
+          },
+          "sconto_pct": {
+            "type": "integer",
+            "default": 0
+          },
+          "totale": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "fornitore",
+          "numero",
+          "data_iso",
+          "valuta",
+          "righe",
+          "subtotale",
+          "sconto_pct",
+          "totale"
+        ]
+      },
+      "golden": [
+        "{\"data_iso\":\"2024-03-12\",\"fornitore\":\"Ditta Rossi SRL\",\"numero\":\"RR-2024-117\",\"righe\":3,\"sconto_pct\":5,\"subtotale\":350,\"totale\":332.5,\"valuta\":\"EUR\"}"
+      ]
+    },
+    {
+      "id": "sv_ext_02",
+      "category": "estrazione",
+      "difficulty": "easy",
+      "prompt": "Dal verbale estrai: partecipanti (numero), la decisione presa (frase breve), numero di azioni CON scadenza assegnata, owner dell'unica azione con scadenza piu' vicina.\n\nDATI:\nVerbale sprint 14. Presenti: Anna, Bruno, Carla, Dario.\nDecisione: si migra il database su Postgres.\nAzioni assegnate: Anna prepara lo schema (venerdi'), Bruno scrive la migrazione (lunedi').\nDario aggiorna la documentazione, senza scadenza.\nProssimo incontro giovedi' 10.\n\nRispondi con UNA SOLA riga contenente UN SOLO oggetto JSON (niente testo, niente fence, niente altre righe) con ESATTAMENTE questi campi:\n  - \"partecipanti\" (integer)\n  - \"decisione\" (string)\n  - \"azioni\" (integer)\n  - \"owner\" (string)",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "partecipanti": {
+            "type": "integer"
+          },
+          "decisione": {
+            "type": "string"
+          },
+          "azioni": {
+            "type": "integer"
+          },
+          "owner": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "partecipanti",
+          "decisione",
+          "azioni",
+          "owner"
+        ]
+      },
+      "golden": [
+        "{\"azioni\":2,\"decisione\":\"migrazione database su Postgres\",\"owner\":\"Anna\",\"partecipanti\":4}"
+      ]
+    },
+    {
+      "id": "sv_ext_03",
+      "category": "estrazione",
+      "difficulty": "easy",
+      "prompt": "Normalizza l'indirizzo di consegna: via (senza civico), civico, citta', CAP come intero, paese.\n\nDATI:\nSpett.le\nSig. Mario Bianchi\nCorso Buenos Aires 88\n20124 Milano (MI)\nItalia\n\nRispondi con UNA SOLA riga contenente UN SOLO oggetto JSON (niente testo, niente fence, niente altre righe) con ESATTAMENTE questi campi:\n  - \"via\" (string)\n  - \"civico\" (integer)\n  - \"citta\" (string)\n  - \"cap\" (integer)\n  - \"paese\" (string) — accettato uno tra ['IT', 'Italia']",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "via": {
+            "type": "string"
+          },
+          "civico": {
+            "type": "integer"
+          },
+          "citta": {
+            "type": "string"
+          },
+          "cap": {
+            "type": "integer"
+          },
+          "paese": {
+            "type": "string",
+            "any_of": [
+              "IT",
+              "Italia"
+            ]
+          }
+        },
+        "required": [
+          "via",
+          "civico",
+          "citta",
+          "cap",
+          "paese"
+        ]
+      },
+      "golden": [
+        "{\"cap\":20124,\"citta\":\"Milano\",\"civico\":88,\"paese\":\"IT\",\"via\":\"Corso Buenos Aires\"}"
+      ]
+    },
+    {
+      "id": "sv_tra_01",
+      "category": "trasformazione",
+      "difficulty": "easy",
+      "prompt": "Aggrega le vendite per regione e restituisci la regione con il totale piu' alto (totale arrotondato a 2 decimali).\n\nDATI:\nvendite,regione,trimestre\n1200.0,nord,Q1\n1350.5,nord,Q2\n800.25,sud,Q1\n1100.0,sud,Q2\n950.0,centro,Q1\n980.0,centro,Q2\n\nRispondi con UNA SOLA riga contenente UN SOLO oggetto JSON (niente testo, niente fence, niente altre righe) con ESATTAMENTE questi campi:\n  - \"regione\" (string)\n  - \"netto\" (number)",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "regione": {
+            "type": "string"
+          },
+          "netto": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "regione",
+          "netto"
+        ]
+      },
+      "golden": [
+        "{\"netto\":2550.5,\"regione\":\"nord\"}"
+      ]
+    },
+    {
+      "id": "sv_tra_02",
+      "category": "trasformazione",
+      "difficulty": "easy",
+      "prompt": "Appiattisci la configurazione annidata in chiavi puntate (sezione.sottochiave.proprieta'). Restituisci la riga della porta TLS con il suo valore intero.\n\nDATI:\n{\n  \"server\": {\n    \"host\": \"0.0.0.0\",\n    \"tls\": {\n      \"port\": 8443,\n      \"verify\": true\n    },\n    \"workers\": 4\n  },\n  \"log\": {\n    \"level\": \"info\"\n  }\n}\n\nRispondi con UNA SOLA riga contenente UN SOLO oggetto JSON (niente testo, niente fence, niente altre righe) con ESATTAMENTE questi campi:\n  - \"chiave\" (string)\n  - \"valore\" (integer)",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "chiave": {
+            "type": "string"
+          },
+          "valore": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "chiave",
+          "valore"
+        ]
+      },
+      "golden": [
+        "{\"chiave\":\"server.tls.port\",\"valore\":8443}"
+      ]
+    },
+    {
+      "id": "sv_tra_03",
+      "category": "trasformazione",
+      "difficulty": "easy",
+      "prompt": "Date di un calendario in formati misti (MM/GG/AAAA, GG-Mes-AAAA, AAAA-MM-GG). Normalizzale tutte in YYYY-MM-DD nell'ordine di origine, joined by ','; min/max sono le date estreme nel formato ISO.\n\nDATI:\n03/15/2024\n15-Mar-2024\n2024-03-16\n04/02/2024\n2024-04-03\n\nRispondi con UNA SOLA riga contenente UN SOLO oggetto JSON (niente testo, niente fence, niente altre righe) con ESATTAMENTE questi campi:\n  - \"date_iso\" (string)\n  - \"min\" (string)\n  - \"max\" (string)",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "date_iso": {
+            "type": "string"
+          },
+          "min": {
+            "type": "string"
+          },
+          "max": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "date_iso",
+          "min",
+          "max"
+        ]
+      },
+      "golden": [
+        "{\"date_iso\":\"2024-03-15,2024-03-15,2024-03-16,2024-04-02,2024-04-03\",\"max\":\"2024-04-03\",\"min\":\"2024-03-15\"}"
+      ]
+    },
+    {
+      "id": "sv_tra_04",
+      "category": "trasformazione",
+      "difficulty": "easy",
+      "prompt": "Dalla STESSA tabella vendite, aggrega per trimestre: restituisci il trimestre con il totale maggiore e la sua quota percentuale sul totale complessivo (1 decimale).\n\nDATI:\nvendite,regione,trimestre\n1200.0,nord,Q1\n1350.5,nord,Q2\n800.25,sud,Q1\n1100.0,sud,Q2\n950.0,centro,Q1\n980.0,centro,Q2\n\nRispondi con UNA SOLA riga contenente UN SOLO oggetto JSON (niente testo, niente fence, niente altre righe) con ESATTAMENTE questi campi:\n  - \"trimestre\" (string)\n  - \"share_pct\" (number)",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "trimestre": {
+            "type": "string"
+          },
+          "share_pct": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "trimestre",
+          "share_pct"
+        ]
+      },
+      "golden": [
+        "{\"share_pct\":53.8,\"trimestre\":\"Q2\"}"
+      ]
+    },
+    {
+      "id": "sv_qry_01",
+      "category": "query",
+      "difficulty": "easy",
+      "prompt": "Tra i dipendenti del reparto R&D trova lo stipendio massimo; se ci sono ex aequo prendi il nome primo alfabeticamente. Restituisci nome e stipendio.\n\nDATI:\n[\n  {\n    \"nome\": \"Guida\",\n    \"dept\": \"R&D\",\n    \"stipendio\": 71000\n  },\n  {\n    \"nome\": \"Adami\",\n    \"dept\": \"R&D\",\n    \"stipendio\": 78500\n  },\n  {\n    \"nome\": \"Costa\",\n    \"dept\": \"Vendite\",\n    \"stipendio\": 82000\n  },\n  {\n    \"nome\": \"Ferrari\",\n    \"dept\": \"R&D\",\n    \"stipendio\": 78500\n  }\n]\n\nRispondi con UNA SOLA riga contenente UN SOLO oggetto JSON (niente testo, niente fence, niente altre righe) con ESATTAMENTE questi campi:\n  - \"nome\" (string)\n  - \"stipendio\" (integer)",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "stipendio": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "nome",
+          "stipendio"
+        ]
+      },
+      "golden": [
+        "{\"nome\":\"Adami\",\"stipendio\":78500}"
+      ]
+    },
+    {
+      "id": "sv_qry_02",
+      "category": "query",
+      "difficulty": "easy",
+      "prompt": "Voti degli studenti (scala 0-10). Calcola la media di Carla (2 decimali) e se e' promossa (media >= 7).\n\nDATI:\n{\n  \"Anna\": [\n    8,\n    7,\n    9\n  ],\n  \"Bruno\": [\n    6,\n    5,\n    7\n  ],\n  \"Carla\": [\n    9,\n    9,\n    8\n  ]\n}\n\nRispondi con UNA SOLA riga contenente UN SOLO oggetto JSON (niente testo, niente fence, niente altre righe) con ESATTAMENTE questi campi:\n  - \"media\" (number)\n  - \"promosso\" (boolean) — accettato uno tra [True, False]",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "media": {
+            "type": "number"
+          },
+          "promosso": {
+            "type": "boolean",
+            "any_of": [
+              true,
+              false
+            ]
+          }
+        },
+        "required": [
+          "media",
+          "promosso"
+        ]
+      },
+      "golden": [
+        "{\"media\":8.67,\"promosso\":true}"
+      ]
+    },
+    {
+      "id": "sv_qry_03",
+      "category": "query",
+      "difficulty": "easy",
+      "prompt": "Due intervalli di interi chiusi [a-b]. Di' se si sovrappongono e restituisci l'intersezione nel formato 'x-y'; null se non si sovrappongono.\n\nDATI:\n10-20\n15-30\n\nRispondi con UNA SOLA riga contenente UN SOLO oggetto JSON (niente testo, niente fence, niente altre righe) con ESATTAMENTE questi campi:\n  - \"sovrapposti\" (boolean) — accettato uno tra [True, False]\n  - \"intersezione\" (string|null)",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "sovrapposti": {
+            "type": "boolean",
+            "any_of": [
+              true,
+              false
+            ]
+          },
+          "intersezione": {
+            "type": "string|null"
+          }
+        },
+        "required": [
+          "sovrapposti",
+          "intersezione"
+        ]
+      },
+      "golden": [
+        "{\"intersezione\":\"15-20\",\"sovrapposti\":true}"
+      ]
+    },
+    {
+      "id": "sv_qry_04",
+      "category": "query",
+      "difficulty": "easy",
+      "prompt": "Ordini clienti: trova il cliente con il montante totale maggiore (in caso di pari merito nome primo alfabeticamente), il suo totale (2 decimali) e quanti ordini ha.\n\nDATI:\n[\n  {\n    \"id\": 1,\n    \"cliente\": \"Alfa\",\n    \"tot\": 250.0\n  },\n  {\n    \"id\": 2,\n    \"cliente\": \"Beta\",\n    \"tot\": 120.5\n  },\n  {\n    \"id\": 3,\n    \"cliente\": \"Alfa\",\n    \"tot\": 180.25\n  },\n  {\n    \"id\": 4,\n    \"cliente\": \"Gamma\",\n    \"tot\": 300.0\n  },\n  {\n    \"id\": 5,\n    \"cliente\": \"Beta\",\n    \"tot\": 210.0\n  }\n]\n\nRispondi con UNA SOLA riga contenente UN SOLO oggetto JSON (niente testo, niente fence, niente altre righe) con ESATTAMENTE questi campi:\n  - \"cliente\" (string)\n  - \"totale\" (number)\n  - \"ordini\" (integer)",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "cliente": {
+            "type": "string"
+          },
+          "totale": {
+            "type": "number"
+          },
+          "ordini": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "cliente",
+          "totale",
+          "ordini"
+        ]
+      },
+      "golden": [
+        "{\"cliente\":\"Alfa\",\"ordini\":2,\"totale\":430.25}"
+      ]
+    },
+    {
+      "id": "sv_qry_05",
+      "category": "query",
+      "difficulty": "easy",
+      "prompt": "Nel log conta le righe di livello ERR che contengono la sottostringa 'db' (distinta in maiuscole/minuscole) e indica il NUMERO di riga (1-based) della prima corrispondenza. Ripeti la sottostringa cercata nel campo 'sottostringa'.\n\nDATI:\nERR db timeout after 30s\nINFO retry scheduled\nERR db connection refused\nWARN disk at 82%\nERR db timeout after 31s\nINFO recovered\n\nRispondi con UNA SOLA riga contenente UN SOLO oggetto JSON (niente testo, niente fence, niente altre righe) con ESATTAMENTE questi campi:\n  - \"contatore\" (integer)\n  - \"prima_riga\" (integer)\n  - \"sottostringa\" (string)",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "contatore": {
+            "type": "integer"
+          },
+          "prima_riga": {
+            "type": "integer"
+          },
+          "sottostringa": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "contatore",
+          "prima_riga",
+          "sottostringa"
+        ]
+      },
+      "golden": [
+        "{\"contatore\":3,\"prima_riga\":1,\"sottostringa\":\"db\"}"
+      ]
+    }
+  ]
+}

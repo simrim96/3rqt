@@ -1,0 +1,94 @@
+{
+  "id": "20261110T102620Z-eval-aperti-single",
+  "hypothesis": "baseline single-call: una chiamata per task, senza ledger; misura la performance grezza per nodo x suite come termine di confronto delle modalita' ledger/rubrica delle fasi successive (PLAN §3 Fase 2).",
+  "setup": {
+    "mode": "single",
+    "suite": "aperti",
+    "suite_version": "aperti-2026.11-1-a67a9b5a4a3dc7dd",
+    "nodes": [
+      "mid"
+    ],
+    "samples_per_item": 3,
+    "seed_base": 1234,
+    "sampling": {
+      "mid": {
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "max_tokens": 4096,
+        "seed_base": 1234,
+        "extra_body": {
+          "thinking_ratio": 0.0,
+          "chat_template_kwargs": {
+            "enable_thinking": false
+          }
+        }
+      }
+    },
+    "judge_sampling": {
+      "heavy": {
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "max_tokens": 4096,
+        "seed_base": 999,
+        "extra_body": {
+          "thinking_ratio": 0.0
+        }
+      },
+      "mid": {
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "max_tokens": 2048,
+        "seed_base": 999,
+        "extra_body": {
+          "thinking_ratio": 0.0,
+          "chat_template_kwargs": {
+            "enable_thinking": false
+          }
+        }
+      }
+    },
+    "repo": {
+      "git_head": "NO-COMMIT",
+      "tree_sha256": "4f2fce82099bb7f5"
+    },
+    "runtime": {
+      "heavy": {
+        "model": "qwen3.8-flash-next-unsloth-ud-q4_k_xl",
+        "runtime": {
+          "runtime": "strata",
+          "version": "0.6",
+          "server": "BaseHTTP/0.6 Python/3.12.15",
+          "models": [
+            "qwen3.8-flash-next-unsloth-ud-q4_k_xl"
+          ]
+        },
+        "version": null,
+        "chat_format": null,
+        "fingerprint": null,
+        "config_hash": "95ceb87547280b99",
+        "calibrated_at": null
+      },
+      "mid": {
+        "model": "Qwen3.8-27B-exl3-3.0",
+        "runtime": {
+          "runtime": "tabbyAPI",
+          "version": null,
+          "server": "uvicorn",
+          "models": [
+            "Qwen3.8-27B-DFlash2-EXL3-4.0",
+            "Qwen3.8-27B-exl3-3.0"
+          ]
+        },
+        "version": null,
+        "chat_format": null,
+        "fingerprint": null,
+        "config_hash": "95ceb87547280b99",
+        "calibrated_at": null
+      }
+    }
+  },
+  "decision": "in attesa (baseline descrittiva; decisione a fine Fase 2)",
+  "started_at": "2026-11-10T10:26:20.273648+00:00",
+  "finished_at": "2026-11-10T10:40:07.073005+00:00",
+  "n_results": 24
+}

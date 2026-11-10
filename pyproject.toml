@@ -1,0 +1,50 @@
+[project]
+name = "threeracqwen"
+version = "0.0.1"
+description = "Three Racqwen in a Trenchcoat: harness che coordina 3 modelli Qwen sostituibili su nodi diversi, con ruoli legati a capacita misurate."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.27",
+    "pydantic>=2.7",
+    "pyyaml>=6.0",
+]
+
+[project.scripts]
+harness = "cli.main:main"
+
+[dependency-groups]
+dev = [
+    "aiohttp>=3.14.5",
+    "pytest>=8.2",
+    "pytest-asyncio>=1.4.1.post1",
+    "ruff>=0.6",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/nodes", "src/roles", "src/ledger", "src/sandbox", "src/scheduler", "src/evals", "src/cli"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+pythonpath = ["src", "tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "live: test contro i nodi reali (opt-in: RUN_LIVE_NODES=1), mai in CI",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "scripts", "tests"]
+# Le soluzioni di riferimento delle suite sono golden data content-addressed
+# (entrano nell'hash della versione suite): non vanno riformattate/lintate.
+extend-exclude = ["src/evals/suites/verificabili/solutions"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "W"]

@@ -1,0 +1,24 @@
+[mid] op_explain_01 #0 pass=None tok=4360 54.93s err=None
+[mid] op_explain_01 #1 pass=True tok=4342 54.56s err=None
+[mid] op_explain_01 #2 pass=None tok=4360 46.25s err=None
+[mid] op_design_02 #0 pass=True tok=6063 99.48s err=None
+[mid] op_design_02 #1 pass=True tok=5011 67.33s err=None
+[mid] op_design_02 #2 pass=True tok=6287 89.79s err=None
+[mid] op_research_03 #0 pass=True tok=5459 59.26s err=None
+[mid] op_research_03 #1 pass=True tok=4375 66.6s err=None
+[mid] op_research_03 #2 pass=None tok=900 19.76s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: NodeHTTPError: HTTP 503: {"error": {"type": "server_error", "code": "server_draining", "message": "this instance is draining; retry against the next instance"}}
+[mid] op_analyze_04 #0 pass=None tok=961 17.01s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: NodeHTTPError: HTTP 503: {"error": {"type": "server_error", "code": "server_draining", "message": "this instance is draining; retry against the next instance"}}
+[mid] op_analyze_04 #1 pass=None tok=961 37.65s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: ConnectError: All connection attempts failed
+[mid] op_analyze_04 #2 pass=None tok=961 16.67s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: ConnectError: All connection attempts failed
+[mid] op_write_05 #0 pass=None tok=294 6.35s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: ConnectError: All connection attempts failed
+[mid] op_write_05 #1 pass=None tok=294 6.11s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: ConnectError: All connection attempts failed
+[mid] op_write_05 #2 pass=None tok=294 6.18s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: ConnectError: All connection attempts failed
+[mid] op_plan_06 #0 pass=None tok=882 20.78s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: ConnectError: All connection attempts failed
+[mid] op_plan_06 #1 pass=None tok=882 21.11s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: ConnectError: All connection attempts failed
+[mid] op_plan_06 #2 pass=None tok=882 21.61s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: ConnectError: All connection attempts failed
+[mid] op_search_07 #0 pass=None tok=1058 29.73s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: ConnectError: All connection attempts failed
+[mid] op_search_07 #1 pass=None tok=1058 35.45s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: ConnectError: All connection attempts failed
+[mid] op_search_07 #2 pass=None tok=1058 36.56s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: ConnectError: All connection attempts failed
+[mid] op_sum_08 #0 pass=None tok=345 4.41s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: ConnectError: All connection attempts failed
+[mid] op_sum_08 #1 pass=None tok=345 4.8s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: ConnectError: All connection attempts failed
+[mid] op_sum_08 #2 pass=None tok=345 4.32s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: ConnectError: All connection attempts failed

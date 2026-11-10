@@ -1,0 +1,43 @@
+# Ruoli logici. Nessun modello nominato qui: l'assegnazione ruolo->nodo arriva
+# dalla calibrazione (Fase 1) e dai vincoli in config/nodes.yaml (roles_allowed).
+# Temperature ereditate dal riferimento metodo-di-riferimento (docs/reference-metodo-di-riferimento.md §2):
+# pianificazione 0.3, ideazione 0.4, esecuzione/curatela 0.2.
+
+roles:
+  planner:
+    description: Scrive e cura plan.md e la lista task; sceglie il prossimo task.
+    temperature: 0.3
+  ideator:
+    description: Ideazione senza codice; difficolta, approcci distinti, pitfall.
+    temperature: 0.4
+  worker:
+    description: Esegue un singolo task; soluzione completa + note curate.
+    temperature: 0.2
+  verifier:
+    description: Verifica incrociata su soluzione altrui (Fase 5).
+    temperature: 0.2
+  reviewer:
+    description: Revisione di qualita/stile/correttezza (Fase 5).
+    temperature: 0.2
+  router:
+    description: >-
+      Instradamento task ai nodi (Fase 4) e scelta fast path vs deep mode
+      (Fase 6); temperatura 0.
+    temperature: 0.0
+  edge:
+    description: >-
+      Opera su estratti del problema, mai sulla descrizione completa
+      (guardrail PLAN §0.6/§5). E' lo stesso ruolo worker con contesto
+      limitato, non un ruolo separato: contesto massimo in nodes.yaml (ctx).
+    temperature: 0.2
+  titler:
+    description: Titoli/riassunti corti per tier edge (Fase 6).
+    temperature: 0.0
+  compressor:
+    description: Compressione estrattiva delle note (Fase 6).
+    temperature: 0.0
+  embedder:
+    description: >-
+      Embedding per il retrieval sul ledger (Fasi 6+). Richiede capacita di
+      embeddings: al momento nessun nodo le espone (edge sara' TBD).
+    temperature: 0.0

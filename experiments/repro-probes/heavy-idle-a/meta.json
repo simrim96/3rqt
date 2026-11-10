@@ -1,0 +1,89 @@
+{
+  "id": "20261110T113905Z-eval-verificabili-single",
+  "hypothesis": "baseline single-call: una chiamata per task, senza ledger; misura la performance grezza per nodo x suite come termine di confronto delle modalita' ledger/rubrica delle fasi successive (PLAN §3 Fase 2).",
+  "setup": {
+    "mode": "single",
+    "suite": "verificabili",
+    "suite_version": "verificabili-2026.11-1-d65c63b6c5e9441f",
+    "nodes": [
+      "heavy"
+    ],
+    "samples_per_item": 3,
+    "seed_base": 1234,
+    "sampling": {
+      "heavy": {
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "max_tokens": 8192,
+        "seed_base": 1234,
+        "extra_body": {}
+      }
+    },
+    "judge_sampling": {
+      "heavy": {
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "max_tokens": 4096,
+        "seed_base": 999,
+        "extra_body": {
+          "thinking_ratio": 0.0
+        }
+      },
+      "mid": {
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "max_tokens": 2048,
+        "seed_base": 999,
+        "extra_body": {
+          "thinking_ratio": 0.0,
+          "chat_template_kwargs": {
+            "enable_thinking": false
+          }
+        }
+      }
+    },
+    "repo": {
+      "git_head": "NO-COMMIT",
+      "tree_sha256": "4f2fce82099bb7f5"
+    },
+    "runtime": {
+      "heavy": {
+        "model": "qwen3.8-flash-next-unsloth-ud-q4_k_xl",
+        "runtime": {
+          "runtime": "strata",
+          "version": "0.6",
+          "server": "BaseHTTP/0.6 Python/3.12.15",
+          "models": [
+            "qwen3.8-flash-next-unsloth-ud-q4_k_xl"
+          ]
+        },
+        "version": null,
+        "chat_format": null,
+        "fingerprint": null,
+        "config_hash": "95ceb87547280b99",
+        "calibrated_at": null
+      },
+      "mid": {
+        "model": "Qwen3.8-27B-exl3-3.0",
+        "runtime": {
+          "runtime": "tabbyAPI",
+          "version": null,
+          "server": "uvicorn",
+          "models": [
+            "Qwen3.8-27B-DFlash2-EXL3-4.0",
+            "Qwen3.8-27B-exl3-3.0"
+          ]
+        },
+        "version": null,
+        "chat_format": null,
+        "fingerprint": null,
+        "config_hash": "95ceb87547280b99",
+        "calibrated_at": null
+      }
+    }
+  },
+  "decision": "in attesa (baseline descrittiva; decisione a fine Fase 2)",
+  "started_at": "2026-11-10T11:39:05.010488+00:00",
+  "finished_at": "2026-11-10T11:39:42.801406+00:00",
+  "n_results": 3
+}

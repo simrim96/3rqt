@@ -1,0 +1,36 @@
+[heavy] sv_ext_01 #0 pass=True tok=907 9.57s err=None
+[heavy] sv_ext_01 #1 pass=True tok=1085 16.69s err=None
+[heavy] sv_ext_01 #2 pass=True tok=857 21.32s err=None
+[heavy] sv_ext_02 #0 pass=False tok=745 14.41s err=None
+[heavy] sv_ext_02 #2 pass=False tok=755 25.84s err=None
+[heavy] sv_ext_02 #1 pass=False tok=1512 39.23s err=None
+[heavy] sv_ext_03 #0 pass=True tok=481 8.1s err=None
+[heavy] sv_ext_03 #1 pass=True tok=481 10.44s err=None
+[heavy] sv_ext_03 #2 pass=True tok=481 36.12s err=None
+[heavy] sv_tra_01 #0 pass=True tok=526 3.8s err=None
+[heavy] sv_tra_01 #1 pass=True tok=435 5.53s err=None
+[heavy] sv_tra_01 #2 pass=True tok=429 7.25s err=None
+[heavy] sv_tra_02 #0 pass=True tok=391 40.42s err=None
+[heavy] sv_tra_02 #1 pass=True tok=386 160.98s err=None
+[heavy] sv_tra_02 #2 pass=True tok=386 168.46s err=None
+[heavy] sv_tra_03 #0 pass=True tok=704 42.39s err=None
+[heavy] sv_tra_03 #1 pass=True tok=707 51.11s err=None
+[heavy] sv_tra_03 #2 pass=True tok=707 99.04s err=None
+[heavy] sv_tra_04 #0 pass=True tok=660 42.65s err=None
+[heavy] sv_tra_04 #1 pass=True tok=559 71.26s err=None
+[heavy] sv_tra_04 #2 pass=True tok=660 109.24s err=None
+[heavy] sv_qry_01 #2 pass=True tok=491 92.76s err=None
+[heavy] sv_qry_01 #1 pass=True tok=482 94.6s err=None
+[heavy] sv_qry_01 #0 pass=True tok=508 96.57s err=None
+[heavy] sv_qry_02 #1 pass=True tok=401 10.2s err=None
+[heavy] sv_qry_02 #0 pass=True tok=405 62.3s err=None
+[heavy] sv_qry_02 #2 pass=True tok=505 65.25s err=None
+[heavy] sv_qry_03 #0 pass=True tok=414 12.05s err=None
+[heavy] sv_qry_03 #1 pass=True tok=408 22.49s err=None
+[heavy] sv_qry_03 #2 pass=True tok=414 24.83s err=None
+[heavy] sv_qry_04 #0 pass=False tok=374 70.03s err=None
+[heavy] sv_qry_04 #1 pass=False tok=374 70.03s err=None
+[heavy] sv_qry_04 #2 pass=False tok=374 70.03s err=None
+[heavy] sv_qry_05 #0 pass=None tok=0 27.45s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: ReadError: 
+[heavy] sv_qry_05 #1 pass=None tok=0 27.45s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: ReadError: 
+[heavy] sv_qry_05 #2 pass=None tok=0 27.45s err=AdapterError: nodo http://llm-server:8080/v1: chat/completions fallita dopo 3 tentativi: ReadError: 

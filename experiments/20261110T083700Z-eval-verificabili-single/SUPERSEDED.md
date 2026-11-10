@@ -1,0 +1,1 @@
+SUPERSEDED: run con max_tokens heavy=4096/mid=2048. Entrambi i modelli producono chain-of-thought nonostante thinking_ratio=0.0 (probe: 107 char di testo = 1436 token di completion): diversi campioni fallivano per TRONCAMENTO al cap, non per errore del modello. Cfr. docs/DECISIONS.md D5. Sostituita da run con cap 8192/4096.

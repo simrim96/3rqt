@@ -1,0 +1,12 @@
+{
+  "tools": true,
+  "json_object": true,
+  "json_schema": true,
+  "streamed_usage": null,
+  "chat_template_applied": true,
+  "chat_template_source": "GET /props:chat_template",
+  "effective_ctx": null,
+  "notes": {},
+  "probed_at": "2026-11-10T01:56:59+00:00",
+  "config_hash": "95ceb87547280b99"
+}

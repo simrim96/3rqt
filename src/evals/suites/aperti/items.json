@@ -1,0 +1,265 @@
+{
+  "name": "aperti",
+  "version": "2026.11-1",
+  "description": "Task aperti (scrittura/analisi/ricerca) con rubrica fissa a punteggi interi. Il giudice e' SEMPRE un nodo di famiglia diversa dal generatore (heavy giudica mid e viceversa); tutti i risultati sono marcati low_confidence: true. Preferiti item autoverificabili: il punteggio dipende da vincoli concreti, non dallo stile.",
+  "gen_system": "Rispondi in modo completo, onesto e verificabile. Se un vincolo della consegna (lunghezza, numero di elementi, formato) non puo' essere rispettato, dichiaralo invece di aggirarlo. Non inventare fatti, numeri o citazioni.",
+  "items": [
+    {
+      "id": "op_explain_01",
+      "category": "analisi",
+      "difficulty": "easy",
+      "prompt": "Spiega a una persona non tecnica (massimo 250 parole) cosa si intende per \"checkpoint\" di un modello linguistico e perche' salvare un checkpoint ha un costo. Vincolo: ogni affermazione tecnica deve essere riformulata in linguaggio comune nello stesso paragrafo.",
+      "rubric": [
+        {
+          "id": "c1",
+          "criterion": "Definisce il checkpoint come stato completo del modello (pesi e, se menzionato, stato dell'ottimizzatore) salvato su disco per riprendere o riusare il lavoro",
+          "points": 3
+        },
+        {
+          "id": "c2",
+          "criterion": "Spiega il costo di archiviazione in termini concreti (dimensione dei pesi, numero di copie)",
+          "points": 2
+        },
+        {
+          "id": "c3",
+          "criterion": "Spiega il trade-off tempo: riprendere da checkpoint costa meno che ricominciare, e perche'",
+          "points": 2
+        },
+        {
+          "id": "c4",
+          "criterion": "Rispetta il limite dichiarato di 250 parole (dichiara il conteggio o resta visibilmente sotto)",
+          "points": 1
+        },
+        {
+          "id": "c5",
+          "criterion": "Nessun numero, benchmark o nome proprio inventato a supporto",
+          "points": 2
+        }
+      ],
+      "pass_fraction": 0.7
+    },
+    {
+      "id": "op_design_02",
+      "category": "analisi",
+      "difficulty": "medium",
+      "prompt": "Progetta un sistema di sincronizzazione note local-first tra due dispositivi senza server centrale. La consegna deve specificare: strategia di risoluzione dei conflitti, trasporto di sincronizzazione, comportamento offline, sicurezza dei dati, e i DUE limiti noti dell'approccio scelto.",
+      "rubric": [
+        {
+          "id": "c1",
+          "criterion": "Strategia anti-conflitto concreta e implementabile (es. CRDT, LWW con timestamp motivato, operation log) — non solo nominata ma descritta nel meccanismo",
+          "points": 3
+        },
+        {
+          "id": "c2",
+          "criterion": "Trasporto di sincronizzazione descritto (peer-to-peer, relay, pairing iniziale) con almeno un dettaglio realizzabile",
+          "points": 2
+        },
+        {
+          "id": "c3",
+          "criterion": "Comportamento offline esplicito: cosa accade alle modifiche in assenza di rete e al rientro",
+          "points": 2
+        },
+        {
+          "id": "c4",
+          "criterion": "Sicurezza: cifratura end-to-end o equivalente, con gestione delle chiavi almeno abbozzata",
+          "points": 2
+        },
+        {
+          "id": "c5",
+          "criterion": "Due limiti dell'approccio dichiarati e plausibili (non banalita' tipo 'la rete puo' mancare')",
+          "points": 1
+        }
+      ],
+      "pass_fraction": 0.7
+    },
+    {
+      "id": "op_research_03",
+      "category": "ricerca",
+      "difficulty": "hard",
+      "prompt": "Elenca TRE lavori o sistemi reali sul tema \"catena di ragionamento (chain of thought) e affidabilita' del ragionamento dei LLM\", ognuno con autori (o organizzazione), anno e una frase sul perche' conta per l'affidabilita'. Vincolo: se non sei certo che un lavoro esista, omettilo; meglio due lavori che tre con uno inventato. Dichiara alla fine il tuo livello di confidenza su ciascuna citazione.",
+      "rubric": [
+        {
+          "id": "c1",
+          "criterion": "Almeno due citazioni plausibilmente reali e pertinenti con autori/organizzazione e anno (es. Wei et al. 2022 CoT; Kojima et al. 2022 zero-shot CoT; Self-Consistency Wang et al. 2023)",
+          "points": 3
+        },
+        {
+          "id": "c2",
+          "criterion": "Nessuna citazione chiaramente inventata (titoli che non corrispondono a lavori noti presentati come reali)",
+          "points": 3
+        },
+        {
+          "id": "c3",
+          "criterion": "Per ogni voce il nesso con l'affidabilita' del ragionamento e' spiegato, non solo affermato",
+          "points": 2
+        },
+        {
+          "id": "c4",
+          "criterion": "Confidenza per citazione dichiarata come richiesto dal vincolo della consegna",
+          "points": 2
+        }
+      ],
+      "pass_fraction": 0.75
+    },
+    {
+      "id": "op_analyze_04",
+      "category": "analisi",
+      "difficulty": "medium",
+      "prompt": "Vendite trimestrali 2025 (migliaia di EUR): Q1 120, Q2 135, Q3 171, Q4 160. Identifica il trimestre con la crescita relativa piu' alta, calcolane la crescita percentuale e scrivi il totale annuo. Mostra i calcoli passo per passo e dichiara in una riga perche' la crescita relativa puo' fuorviare rispetto alla crescita assoluta.",
+      "rubric": [
+        {
+          "id": "c1",
+          "criterion": "Indica Q3 come trimestre con crescita relativa piu' alta",
+          "points": 3
+        },
+        {
+          "id": "c2",
+          "criterion": "Crescita relativa di Q3 corretta: 26,7% (o 26,67%) entro +-0,5 punti; Q2 12,5%, Q4 -6,25% se calcolati correttamente",
+          "points": 3
+        },
+        {
+          "id": "c3",
+          "criterion": "Totale annuo corretto: 586 (migliaia EUR)",
+          "points": 2
+        },
+        {
+          "id": "c4",
+          "criterion": "Calcoli mostrati passo per passo (numeratore/denominatore visibili), non solo risultato",
+          "points": 1
+        },
+        {
+          "id": "c5",
+          "criterion": "Limite della crescita relativa spiegato (base piu' piccola amplifica la percentuale: Q2 +15k > Q3 in k assoluti)",
+          "points": 1
+        }
+      ],
+      "pass_fraction": 0.7
+    },
+    {
+      "id": "op_write_05",
+      "category": "scrittura",
+      "difficulty": "easy",
+      "prompt": "Scrivi in italiano una email di annuncio (massimo 120 parole) del lancio di un abbonamento a un tool di sincronizzazione backup. Vincoli: esattamente 3 punti elenco, una sola call-to-action finale, zero superlativi o aggettivi pomposi (vietati: 'unico', 'imperdibile', 'rivoluzionario', 'il migliore', 'straordinario').",
+      "rubric": [
+        {
+          "id": "c1",
+          "criterion": "Lunghezza entro 120 parole (verificabile dal conteggio visibile nel testo)",
+          "points": 2
+        },
+        {
+          "id": "c2",
+          "criterion": "Esattamente 3 punti elenco, né 2 né 4",
+          "points": 2
+        },
+        {
+          "id": "c3",
+          "criterion": "Una sola call-to-action, in chiusura",
+          "points": 2
+        },
+        {
+          "id": "c4",
+          "criterion": "Nessuno dei superlativi vietati ne' equivalenti pomposi nel testo",
+          "points": 2
+        },
+        {
+          "id": "c5",
+          "criterion": "Registro coerente e italiano corretto (nessuna frase interrotta o segnaposto)",
+          "points": 2
+        }
+      ],
+      "pass_fraction": 0.7
+    },
+    {
+      "id": "op_plan_06",
+      "category": "scrittura",
+      "difficulty": "medium",
+      "prompt": "Descrivi un piano di ESATTAMENTE 5 passi per migrare un monolite con database di produzione verso microservizi senza downtime. Ogni passo DEVE includere la procedura di rollback specifica di quel passo. Il piano deve citare: doppio canale di scrittura durante la transizione, test di compatibilita' dei dati, e perche' non si perdono dati al taglio finale.",
+      "rubric": [
+        {
+          "id": "c1",
+          "criterion": "Esattamente 5 passi numerati e distinti",
+          "points": 2
+        },
+        {
+          "id": "c2",
+          "criterion": "Rollback specifico (non generico) per CIASCUN dei 5 passi",
+          "points": 3
+        },
+        {
+          "id": "c3",
+          "criterion": "Doppia scrittura (dual write / shadow write) descritta come fase della transizione",
+          "points": 2
+        },
+        {
+          "id": "c4",
+          "criterion": "Test di consistenza/compatibilita' dei dati prima del taglio (reconciliation, confronto righe)",
+          "points": 2
+        },
+        {
+          "id": "c5",
+          "criterion": "Argomento esplicito di zero data loss al momento del taglio finale",
+          "points": 1
+        }
+      ],
+      "pass_fraction": 0.7
+    },
+    {
+      "id": "op_search_07",
+      "category": "ricerca",
+      "difficulty": "hard",
+      "prompt": "Quali sono le DUE differenze piu' importanti tra TCP e QUIC in reti mobili con perdite di pacchetti? Per ciascuna: spiega il MECCANISMO (cosa succede pacchetto per pacchetto o connettivita' per connettivita'), poi una conseguenza pratica osservabile. Vincolo: niente fonti esterne; tutto deve essere verificabile dalla sola spiegazione, senza numeri inventati.",
+      "rubric": [
+        {
+          "id": "c1",
+          "criterion": "Due e sole due differenze, chiaramente separate",
+          "points": 2
+        },
+        {
+          "id": "c2",
+          "criterion": "Head-of-line blocking: una perdita su TCP blocca tutti i flussi multiplexati sulla connessione, mentre il multiplexing QUIC su stream indipendenti (sopra UDP) no — meccanismo spiegato, non nominato e basta",
+          "points": 3
+        },
+        {
+          "id": "c3",
+          "criterion": "Migration della connessione: QUIC identifica la connessione con un Connection ID indipendente da IP/porta, quindi il cambio di rete non rompe la sessione; TCP si (spiegato il perche': la 4-tuple)",
+          "points": 3
+        },
+        {
+          "id": "c4",
+          "criterion": "Per ogni differenza una conseguenza pratica coerente, senza numeri o benchmark inventati",
+          "points": 2
+        }
+      ],
+      "pass_fraction": 0.75
+    },
+    {
+      "id": "op_sum_08",
+      "category": "scrittura",
+      "difficulty": "easy",
+      "prompt": "Riassumi in ESATTAMENTE 3 frasi il seguente testo, senza aggiungere informazioni esterne:\n\n\"La KV cache memorizza le chiavi e i valori gia' calcolati dai layer di attenzione per i token passati. Durante la generazione, ogni nuovo token deve partecipare all'attenzione con tutti i token precedenti: ricalcolarli a ogni passo costerebbe tempo proporzionale alla lunghezza della sequenza. Con la cache, il calcolo si riduce al nuovo token, ma la cache occupa memoria crescente con la lunghezza del contesto e il numero di richieste concorrenti. Per questo i serving system bilanciano contesto massimo, quantitativi di KV cache e batching: la memoria della cache, non la potenza di calcolo, diventa spesso il collo di bottiglia che limita il numero di conversazioni servite in parallelo.\"",
+      "rubric": [
+        {
+          "id": "c1",
+          "criterion": "Esattamente 3 frasi (conteggiabili: tre punti finali non abbreviati)",
+          "points": 2
+        },
+        {
+          "id": "c2",
+          "criterion": "Fedelta': nessuna informazione assente nel testo (no numeri, no prodotti, no estensioni)",
+          "points": 3
+        },
+        {
+          "id": "c3",
+          "criterion": "Punto chiave preservato: la cache riduce il calcolo perche' evita di ricalcolare i token passati",
+          "points": 3
+        },
+        {
+          "id": "c4",
+          "criterion": "Secondo punto chiave preservato: la memoria della cache (non il calcolo) limita le richieste concorrenti",
+          "points": 2
+        }
+      ],
+      "pass_fraction": 0.7
+    }
+  ]
+}

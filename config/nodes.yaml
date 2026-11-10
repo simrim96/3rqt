@@ -1,0 +1,46 @@
+# Nodi reali del progetto (verificati raggiungibili 2026-11-10).
+# Nessun nome di modello va nel codice: questo e' l'unico posto dove vive (PLAN §0.2).
+# Campo `enabled` (default true) e' un'estensione nostra: i placeholder disabilitati
+# vengono saltati da ogni tool che legge il registro.
+
+nodes:
+  heavy:
+    # Server remoto (llm-server, 192.168.1.17). SSH solo via hostname.
+    # Runtime: Strata (llama.cpp-family, API OpenAI-compatibile).
+    endpoint: http://llm-server:8080/v1
+    model: qwen3.8-flash-next-unsloth-ud-q4_k_xl
+    family: qwen
+    ctx: 131072
+    concurrency: 4
+    availability: always
+    roles_allowed: [planner, worker, verifier, reviewer]
+
+  mid:
+    # Laptop locale, risorse condivise. Runtime: tabbyAPI (exllamav3).
+    # model primario: Qwen3.8-27B-exl3-3.0 (ctx attivo 65536, n_ctx_train 262144).
+    endpoint: http://localhost:8080/v1
+    model: Qwen3.8-27B-exl3-3.0
+    # Secondo modello servito dallo stesso endpoint (variante draft/speculative):
+    extra_models: [Qwen3.8-27B-DFlash2-EXL3-4.0]
+    family: qwen
+    ctx: 65536
+    concurrency: 1
+    availability: best_effort
+    roles_allowed: [worker, reviewer]
+
+  edge:
+    # TBD: telefono o Raspberry (PLAN §1, slot C). Placeholder disabilitato.
+    enabled: false
+    endpoint: http://edge:8080/v1
+    model: TBD
+    family: qwen
+    ctx: 8192
+    concurrency: 1
+    availability: best_effort
+    roles_allowed: [router, titler, embedder, compressor]
+
+policy:
+  quality_first: true
+  max_rounds: 8
+  fallback_role_to: heavy
+  reassign_roles_on_calibration: true

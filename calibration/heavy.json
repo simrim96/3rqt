@@ -1,0 +1,349 @@
+{
+  "node": "heavy",
+  "endpoint": "http://llm-server:8080/v1",
+  "model": "qwen3.8-flash-next-unsloth-ud-q4_k_xl",
+  "date": "2026-11-10T01:56:59+00:00",
+  "config_hash": "95ceb87547280b99",
+  "runtime": {
+    "runtime": "strata",
+    "version": "0.6",
+    "server": "BaseHTTP/0.6 Python/3.12.15",
+    "models": [
+      "qwen3.8-flash-next-unsloth-ud-q4_k_xl"
+    ]
+  },
+  "suite_version": "mini-1",
+  "capabilities_snapshot": {
+    "tools": true,
+    "json_object": true,
+    "json_schema": true,
+    "streamed_usage": null,
+    "chat_template_applied": true,
+    "chat_template_source": "GET /props:chat_template",
+    "effective_ctx": null,
+    "notes": {},
+    "probed_at": "2026-11-10T01:56:53+00:00",
+    "config_hash": "95ceb87547280b99"
+  },
+  "measures": {
+    "stream": {
+      "ttft_s": 0.4178,
+      "gen_tokens": 256,
+      "gen_seconds": 3.0852,
+      "tokens_per_s": 95.97,
+      "stream": true,
+      "degraded": []
+    },
+    "concurrency": [
+      {
+        "concurrency": 1,
+        "repeats": [
+          {
+            "ok": 1,
+            "failed": 0,
+            "agg_tokens_per_s": 49.51,
+            "mean_ttft_s": 0.5242,
+            "max_ttft_s": 0.5242,
+            "wall_s": 1.2927
+          },
+          {
+            "ok": 1,
+            "failed": 0,
+            "agg_tokens_per_s": 77.76,
+            "mean_ttft_s": 0.074,
+            "max_ttft_s": 0.074,
+            "wall_s": 0.823
+          }
+        ]
+      },
+      {
+        "concurrency": 2,
+        "repeats": [
+          {
+            "ok": 2,
+            "failed": 0,
+            "agg_tokens_per_s": 94.8,
+            "mean_ttft_s": 0.4094,
+            "max_ttft_s": 0.7489,
+            "wall_s": 1.3502
+          },
+          {
+            "ok": 2,
+            "failed": 0,
+            "agg_tokens_per_s": 87.16,
+            "mean_ttft_s": 0.4163,
+            "max_ttft_s": 0.7696,
+            "wall_s": 1.4686
+          }
+        ]
+      },
+      {
+        "concurrency": 4,
+        "repeats": [
+          {
+            "ok": 4,
+            "failed": 0,
+            "agg_tokens_per_s": 105.51,
+            "mean_ttft_s": 0.9728,
+            "max_ttft_s": 1.8529,
+            "wall_s": 2.4263
+          },
+          {
+            "ok": 4,
+            "failed": 0,
+            "agg_tokens_per_s": 107.21,
+            "mean_ttft_s": 0.9678,
+            "max_ttft_s": 1.8593,
+            "wall_s": 2.3878
+          }
+        ]
+      }
+    ],
+    "context": {
+      "requested_tokens_approx": 16384,
+      "prompt_tokens_reported": 16378,
+      "usage_estimated": false,
+      "ttft_prefill_s": 5.6508,
+      "wall_s": 10.997
+    },
+    "long_generation": {
+      "runs": [
+        {
+          "ok": true,
+          "gen_tokens": 1500,
+          "tokens_per_s": 128.43,
+          "finish_reason": "length",
+          "ttft_s": 0.4846
+        },
+        {
+          "ok": true,
+          "gen_tokens": 1500,
+          "tokens_per_s": 83.59,
+          "finish_reason": "length",
+          "ttft_s": 7.6521
+        }
+      ],
+      "stable": true,
+      "max_tokens": 1500
+    },
+    "mini_eval": {
+      "suite": "mini-1",
+      "n": 40,
+      "correct": 37,
+      "accuracy": 0.925,
+      "seconds": 94.41,
+      "items": [
+        {
+          "id": "arith_01",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_02",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_03",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_04",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_05",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_06",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_07",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_08",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_09",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_10",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_11",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "arith_12",
+          "category": "arith",
+          "ok": true
+        },
+        {
+          "id": "mod_01",
+          "category": "mod",
+          "ok": true
+        },
+        {
+          "id": "mod_02",
+          "category": "mod",
+          "ok": false,
+          "got": "3^32 = 6956^2 mod7919. 6956^2 =? (7000-44)^2=49,000,000 -616,000 +1936=48,385,93",
+          "expected": "7306",
+          "answer_in_reasoning": false
+        },
+        {
+          "id": "mod_03",
+          "category": "mod",
+          "ok": true
+        },
+        {
+          "id": "mod_04",
+          "category": "mod",
+          "ok": true
+        },
+        {
+          "id": "mod_05",
+          "category": "mod",
+          "ok": false,
+          "got": "5^4=625",
+          "expected": "300",
+          "answer_in_reasoning": false
+        },
+        {
+          "id": "conv_01",
+          "category": "conv",
+          "ok": true
+        },
+        {
+          "id": "conv_02",
+          "category": "conv",
+          "ok": true
+        },
+        {
+          "id": "conv_03",
+          "category": "conv",
+          "ok": true
+        },
+        {
+          "id": "conv_04",
+          "category": "conv",
+          "ok": true
+        },
+        {
+          "id": "conv_05",
+          "category": "conv",
+          "ok": true
+        },
+        {
+          "id": "str_01",
+          "category": "string",
+          "ok": true
+        },
+        {
+          "id": "str_02",
+          "category": "string",
+          "ok": true
+        },
+        {
+          "id": "str_03",
+          "category": "string",
+          "ok": true
+        },
+        {
+          "id": "str_04",
+          "category": "string",
+          "ok": true
+        },
+        {
+          "id": "str_05",
+          "category": "string",
+          "ok": true
+        },
+        {
+          "id": "str_06",
+          "category": "string",
+          "ok": true
+        },
+        {
+          "id": "json_01",
+          "category": "json",
+          "ok": true
+        },
+        {
+          "id": "json_02",
+          "category": "json",
+          "ok": true
+        },
+        {
+          "id": "json_03",
+          "category": "json",
+          "ok": true
+        },
+        {
+          "id": "json_04",
+          "category": "json",
+          "ok": true
+        },
+        {
+          "id": "json_05",
+          "category": "json",
+          "ok": true
+        },
+        {
+          "id": "logic_01",
+          "category": "logic",
+          "ok": true
+        },
+        {
+          "id": "logic_02",
+          "category": "logic",
+          "ok": true
+        },
+        {
+          "id": "logic_03",
+          "category": "logic",
+          "ok": true
+        },
+        {
+          "id": "logic_04",
+          "category": "logic",
+          "ok": true
+        },
+        {
+          "id": "date_01",
+          "category": "date",
+          "ok": true
+        },
+        {
+          "id": "date_02",
+          "category": "date",
+          "ok": false,
+          "got": "Check via Zeller: 2026 Nov 10. Doomsday 2026? 2026 anchor? 2000 Tuesday? 2026: y",
+          "expected": "Tuesday",
+          "answer_in_reasoning": false
+        },
+        {
+          "id": "date_03",
+          "category": "date",
+          "ok": true
+        }
+      ]
+    }
+  },
+  "warnings": []
+}
